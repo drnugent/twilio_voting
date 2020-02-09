@@ -3,8 +3,8 @@
 
 <head>
   <title><%= title %></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 
 <body>
@@ -12,25 +12,25 @@
     <h1 class="header">Vote for your favourite global sport.</h1>
     <main class="main-wrapper">
       <div class="nominees">
-        <form action="">
+        <form>
           <div class="form-group">
             <label for="football" class="wrapper">
               Football
-              <input type="radio" name="vote" id="football">
+              <input type="radio" name="vote" id="football" required />
               <span class="checkmark"></span>
             </label>
           </div>
           <div class="form-group">
             <label for="basketball" class="wrapper">
               Basketball
-              <input type="radio" name="vote" id="basketball">
+              <input type="radio" name="vote" id="basketball" required />
               <span class="checkmark"></span>
             </label>
           </div>
           <div class="form-group">
             <label for="cricket" class="wrapper">
               Cricket
-              <input type="radio" name="vote" id="cricket">
+              <input type="radio" name="vote" id="cricket" required />
               <span class="checkmark"></span>
             </label>
           </div>
@@ -48,37 +48,77 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
   <script>
-    var ctx = document.getElementById('voteChart').getContext('2d');
-    var chart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Football', 'Basketball', 'American Football'],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
+    class VoteChart {
+      static chartData = [0, 0, 0];
+
+      static drawChart() {
+        let context = document.getElementById("voteChart").getContext("2d");
+        let chart = new Chart(context, {
+          type: "bar",
+          data: {
+            labels: ["Football", "Basketball", "American Football"],
+            datasets: [
+              {
+                label: "# of Votes",
+                data: VoteChart.chartData,
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 206, 86, 0.2)"
+                ],
+                borderColor: [
+                  "rgba(255, 99, 132, 1)",
+                  "rgba(54, 162, 235, 1)",
+                  "rgba(255, 206, 86, 1)"
+                ],
+                borderWidth: 1
+              }
+            ]
+          },
+          options: {
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }
+              ]
             }
-          }]
-        }
+          }
+        });
       }
-    });
+    }
+
+    VoteChart.drawChart();
+
+    const form = document.querySelector("form");
+    form.onsubmit = event => {
+      event.preventDefault();
+      const radioButtons = form.querySelectorAll("input[type=radio]");
+      let checkedOption;
+
+      radioButtons.forEach(button => {
+        if (button.checked) {
+          checkedOption = button.id;
+        }
+      });
+
+      fetch("/users", {
+        method: "POST",
+        body: JSON.stringify({ [checkedOption]: checkedOption }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => response.json())
+        .then(response => {
+          console.log(response);
+          updatedChartData = Object.values(response);
+          VoteChart.chartData = updatedChartData;
+          VoteChart.drawChart();
+        });
+    };
   </script>
 </body>
 
