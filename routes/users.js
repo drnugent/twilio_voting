@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 const voteCount = {
-  football: 0,
   basketball: 0,
-  cricket: 0
+  cricket: 0,
+  football: 0
 };
 
 /* POST vote for nominee. */
