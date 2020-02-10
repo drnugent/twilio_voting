@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
+
 const Twilio = require("twilio");
+const syncService = require("../syncService");
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const apiKey = process.env.TWILIO_API_KEY;
-const apiSecret = process.env.TWILIO_API_SECRET;
 const syncServiceSid = process.env.TWILIO_SYNC_SERVICE_SID || "default";
 
 const client = new Twilio(accountSid, authToken);
@@ -17,13 +17,12 @@ const voteCount = {
 };
 
 /* POST vote for nominee. */
-router.post("/", function(req, res, next) {
+router.post("/", function (req, res, next) {
   const key = Object.keys(req.body)[0];
   voteCount[key]++;
 
   // update data in Sync document
-  client.sync
-    .services(syncServiceSid)
+  syncService
     .documents("SportsPoll")
     .update({ data: voteCount })
     .then(document => console.log(document));

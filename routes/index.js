@@ -2,21 +2,19 @@ const express = require("express");
 const router = express.Router();
 
 const Twilio = require("twilio");
+const syncService = require("../syncService");
+
 const AccessToken = Twilio.jwt.AccessToken;
 const SyncGrant = AccessToken.SyncGrant;
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
 const apiKey = process.env.TWILIO_API_KEY;
 const apiSecret = process.env.TWILIO_API_SECRET;
 const syncServiceSid = process.env.TWILIO_SYNC_SERVICE_SID || "default";
 
-const client = new Twilio(accountSid, authToken);
-
 // create a document resource, providing it a Sync service resource SID
-client.sync
-  .services(syncServiceSid)
-  .documents.create({
+syncService.documents
+  .create({
     uniqueName: "SportsPoll",
     data: {
       basketball: 0,
