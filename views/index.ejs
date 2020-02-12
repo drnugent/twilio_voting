@@ -7,41 +7,49 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
     <div class="container">
-      <h1 class="header">Vote for your favourite global sport.</h1>
-      <main class="main-wrapper">
+      <main class="main">
         <div class="nominees">
-          <form>
-            <div class="form-group">
-              <label for="basketball" class="wrapper">
-                Basketball
-                <input type="radio" name="vote" id="basketball" required />
-                <span class="checkmark"></span>
-              </label>
-            </div>
-            <div class="form-group">
-              <label for="cricket" class="wrapper">
-                Cricket
-                <input type="radio" name="vote" id="cricket" required />
-                <span class="checkmark"></span>
-              </label>
-            </div>
-            <div class="form-group">
-              <label for="football" class="wrapper">
-                Football
-                <input type="radio" name="vote" id="football" required />
-                <span class="checkmark"></span>
-              </label>
-            </div>
-            <input type="hidden" name="token" value="<%= token %>" />
+          <div class="heading">
+            <h1 class="header">What is the most popular sport in the world?</h1>
+          </div>
+          <div class="form">
+            <form>
+              <div class="form-group">
+                <label for="basketball" class="wrapper">
+                  Basketball
+                  <input type="radio" name="vote" id="basketball" required />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label for="cricket" class="wrapper">
+                  Cricket
+                  <input type="radio" name="vote" id="cricket" required />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div class="form-group">
+                <label for="football" class="wrapper">
+                  Football
+                  <input type="radio" name="vote" id="football" required />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <input type="hidden" name="token" value="<%= token %>" />
 
-            <div class="form-group">
-              <button type="submit">Vote</button>
-            </div>
-          </form>
+              <div class="form-group">
+                <button type="submit">Submit</button>
+              </div>
+            </form>
+          </div>
         </div>
         <div class="chart">
           <canvas id="voteChart" width="400" height="400"></canvas>
