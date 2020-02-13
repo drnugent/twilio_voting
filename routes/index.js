@@ -25,7 +25,7 @@ syncService.documents
   .then(document => console.log(document));
 
 /* GET home page. */
-router.get("/", function (req, res, next) {
+router.get("/", function(req, res, next) {
   // Generate access token
   const token = new AccessToken(accountSid, apiKey, apiSecret);
 
