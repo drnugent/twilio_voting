@@ -36,11 +36,13 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
+  .container {
+    height: unset;
+  }
   .survey {
     width: 97vw;
     /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); */
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
-    overflow-y: scroll;
   }
 }
 
