@@ -17,7 +17,7 @@ class VoteChart {
         labels: ["Basketball", "Cricket", "Football"],
         datasets: [
           {
-            label: "Number of votes",
+            label: "Count",
             data: this.chartData,
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
@@ -56,7 +56,23 @@ class VoteChart {
   }
 }
 
+// instantiate chart
 let bchart = new VoteChart();
+
+// function to update stats and summary on page
+const updateStats = data => {
+  const totalCountElement = document.querySelector(".total-count");
+  const chartData = Object.values(data);
+
+  const totalCount = chartData.reduce((acc, curr) => acc + curr, 0);
+  totalCountElement.innerText = totalCount;
+
+  for (const item in data) {
+    const parent = document.querySelector(`.${item}-summary`);
+    const element = parent.querySelector("h1");
+    element.innerText = data[item];
+  }
+};
 
 // connect to Sync Service
 const token = document.querySelector("input[type=hidden]").value;
@@ -79,10 +95,14 @@ syncClient.document("SportsPoll").then(document => {
   //render chart with sync document data
   bchart.updateChart(data);
 
+  // display stats and summary
+  updateStats(data);
+
   // update chart when there's an update to the sync document
   document.on("updated", event => {
     console.log("Received Document update event. New value:", event.value);
     bchart.updateChart(event.value);
+    updateStats(event.value);
   });
 });
 

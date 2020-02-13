@@ -23,18 +23,24 @@ h1 {
 }
 
 .main {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: grid;
+}
+
+.survey {
   width: 60vw;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   border-radius: 0.15rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px dashed #ececec;
 }
 
 @media screen and (max-width: 768px) {
-  .main {
+  .survey {
     width: 97vw;
     /* box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); */
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+    overflow-y: scroll;
   }
 }
 
@@ -47,6 +53,53 @@ h1 {
 
 .chart {
   padding: 0 0 0 0.5rem;
+}
+
+.count {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.count h1 {
+  font-size: 1.3rem;
+}
+
+h1.visible {
+  font-weight: 400;
+  font-size: 4rem;
+}
+
+.stats {
+  padding-top: 3rem;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.summary .individual-count,
+.summary .individual-nominee {
+  border: 1px solid #ececec;
+}
+
+.summary .individual-nominee {
+  background-color: whitesmoke;
+}
+
+.summary div {
+  place-content: center;
+}
+
+.summary h1 {
+  text-align: center;
+}
+
+.summary h2 {
+  font-weight: 100;
+  font-size: 1rem;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 form button {
