@@ -75,7 +75,6 @@ const updateSummaryStats = data => {
 };
 
 // connect to Sync Service
-const token = document.querySelector("input[type=hidden]").value;
 let syncClient = new Twilio.Sync.Client(token, { logLevel: "info" });
 
 syncClient.on("connectionStateChanged", state => {
