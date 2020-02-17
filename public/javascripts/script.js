@@ -60,7 +60,7 @@ class VoteChart {
 let bchart = new VoteChart();
 
 // function to update stats and summary on page
-const updateStats = data => {
+const updateSummaryStats = data => {
   const totalCountElement = document.querySelector(".total-count");
   const chartData = Object.values(data);
 
@@ -96,13 +96,13 @@ syncClient.document("SportsPoll").then(document => {
   bchart.updateChart(data);
 
   // display stats and summary
-  updateStats(data);
+  updateSummaryStats(data);
 
   // update chart when there's an update to the sync document
   document.on("updated", event => {
     console.log("Received Document update event. New value:", event.value);
     bchart.updateChart(event.value);
-    updateStats(event.value);
+    updateSummaryStats(event.value);
   });
 });
 
