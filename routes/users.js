@@ -1,14 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Twilio = require("twilio");
 const syncService = require("../syncService");
-
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const syncServiceSid = process.env.TWILIO_SYNC_SERVICE_SID || "default";
-
-const client = new Twilio(accountSid, authToken);
 
 const voteCount = {
   basketball: 0,
