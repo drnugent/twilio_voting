@@ -32,6 +32,7 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   border-radius: 0.15rem;
+  border-top: 1px dashed #ececec;
   border-bottom: 1px dashed #ececec;
 }
 
@@ -62,7 +63,7 @@ h1 {
 }
 
 .chart {
-  padding: 0 0 0 0.5rem;
+  padding: 0 0.5rem;
 }
 
 .count {
