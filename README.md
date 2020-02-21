@@ -1,8 +1,7 @@
 ## Implementing real-time data visualisation in Node.js web apps using Twilio Sync
----
 The companion repository for a tutorial that showcase's Twilio Sync's real-time functionality in Node.js
 
-[View tutorial]()
+[View tutorial](https://www.twilio.com/blog/implementing-real-time-data-visualization-in-node-js-with-sync)
 
 ### Prerequisites
 - A basic knowledge of JavaScript.
